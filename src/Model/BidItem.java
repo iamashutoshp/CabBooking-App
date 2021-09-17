@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Objects;
+
 public class BidItem {
 
     String itemName;
@@ -45,5 +47,21 @@ public class BidItem {
 
     public void setMaxBidLimit(int maxBidLimit) {
         this.maxBidLimit = maxBidLimit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BidItem bidItem = (BidItem) o;
+        return BidAmount == bidItem.BidAmount &&
+                maxBidLimit == bidItem.maxBidLimit &&
+                itemName == bidItem.itemName &&
+                Objects.equals(seller, bidItem.seller);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(itemName, BidAmount, maxBidLimit, seller);
     }
 }

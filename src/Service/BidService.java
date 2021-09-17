@@ -13,4 +13,10 @@ public class BidService {
         bidRepo.getBids().add(bd);
     }
 
+
+    public Bid getWinningBid(BidRepository bidRepo)
+    {
+        return bidRepo.getWinningBid();
+    }
+
 }

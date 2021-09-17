@@ -6,9 +6,13 @@ public class Bid {
 
     Buyer user;
     BidItem item;
-    int bidPrice;
+    int bidPrice = 0;
     Time time;
 
+    public Bid()
+    {
+
+    }
     public Bid(Buyer user, BidItem item, int bidPrice, Time time) {
         this.user = user;
         this.item = item;

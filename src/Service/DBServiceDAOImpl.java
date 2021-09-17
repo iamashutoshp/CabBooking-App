@@ -6,10 +6,10 @@ public class DBServiceDAOImpl {
     // bid -- offered price, user
 
 
-//add a bid  -- record a user's bid for an item
-// update the winning bid
+//add a bid  -- record a user's bid for an item  -- BidService
+// update the winning bid            -- BidService
 //get all bids for an item
-// get all the items on which user has bid
+// get all the items on which user has bid  -- buyer will be there in bid
 // add user, -- CRUD -- diff service
 // CRUD for auction -- diff service
 
