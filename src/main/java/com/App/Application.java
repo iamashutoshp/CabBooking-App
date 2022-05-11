@@ -16,6 +16,8 @@ public class Application {
 		executeTests.addUsers();
 		executeTests.updateUsersLocation();
 		
+		executeTests.addDrivers();
+		
 	}
 
 }

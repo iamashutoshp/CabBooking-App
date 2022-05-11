@@ -7,7 +7,7 @@ public class Driver {
 	private String name;
 	private char gender;
 	private int age;
-
+	private boolean isAvailable;
 	private Ride ride;
 	private Location location;
 
@@ -17,6 +17,7 @@ public class Driver {
 		this.age = age;
 		this.ride = ride;
 		this.location = location;
+		isAvailable = true;
 	}
 
 	public String getName() {
@@ -57,6 +58,14 @@ public class Driver {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
 	}
 
 	@Override
