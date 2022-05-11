@@ -31,7 +31,7 @@ public class UserService {
 	public void addUser(User user) {
 		try {
 			users.put(user.getUserName(), user);
-			logger.info("user added");
+			logger.info("user added : "+user.getUserName());
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
 		}
@@ -40,7 +40,7 @@ public class UserService {
 	public void updateUserLocation(User user, Location location) {
 		try {
 			user.setLocation(location);
-			logger.info("user Location updated !");
+			logger.info(" Location updated for : "+user.getUserName());
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
 		}

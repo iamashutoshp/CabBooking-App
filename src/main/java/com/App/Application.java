@@ -18,6 +18,8 @@ public class Application {
 		
 		executeTests.addDrivers();
 		
+		executeTests.findRide();
+		
 	}
 
 }

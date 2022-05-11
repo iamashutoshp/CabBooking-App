@@ -40,7 +40,7 @@ public class DriverService {
 	public void updateDriverLocation(Driver driver, Location location) {
 		try {
 			driver.setLocation(location);
-			logger.info("Driver location Updated...");
+			logger.info("Location Updated for Driver : "+driver.getName());
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
 		}
@@ -50,7 +50,7 @@ public class DriverService {
 		try {
 			Driver driver = drivers.get(driverName);
 			driver.setAvailable(status);
-			logger.info("Driver status updated ...");
+			logger.info("Status updated for : "+driverName);
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
 		}
