@@ -10,6 +10,7 @@ public class Driver {
 	private boolean isAvailable;
 	private Ride ride;
 	private Location location;
+	private int earnings;
 
 	public Driver(String name, char gender, int age, Ride ride, Location location) {
 		this.name = name;
@@ -66,6 +67,14 @@ public class Driver {
 
 	public void setAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
+	}
+
+	public int getEarnings() {
+		return earnings;
+	}
+
+	public void setEarnings(int earnings) {
+		this.earnings = earnings;
 	}
 
 	@Override

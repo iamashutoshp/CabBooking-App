@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,7 +17,7 @@ import com.App.entity.Location;
 import com.App.entity.User;
 import com.App.helper.Helper;
 
-@Component
+@Service
 public class BookingService {
 	private static final Logger logger = LogManager.getLogger(BookingService.class);
 
@@ -45,7 +45,7 @@ public class BookingService {
 			for (Map.Entry entry : allDrivers.entrySet()) {
 				Driver driver = (Driver) entry.getValue();
 				int distance = helper.getDistance(source, driver.getLocation());
-				if (distance <= 5)
+				if (driver.isAvailable() && distance < 5)
 					availableDrivers.add(driver);
 			}
 			if (availableDrivers.size() > 0)
@@ -64,8 +64,7 @@ public class BookingService {
 			driver.setAvailable(false);
 			bookings.put(user.getUserName(), new Booking(source, destination, user.getUserName(), driver.getName()));
 
-			logger.info(user.getUserName() + " booked : " + driver.getName());
-			
+			calculateBill(user);
 			return true;
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());
@@ -82,12 +81,13 @@ public class BookingService {
 			bill = helper.getDistance(booking.getSource(), booking.getDestination());
 			Map<String, Driver> drivers = driverService.getDrivers();
 
-			drivers.get(booking.getDriverName()).setLocation(booking.getDestination());
+			Driver driver = drivers.get(booking.getDriverName());
+			driver.setLocation(booking.getDestination());
 			user.setLocation(booking.getDestination());
 			booking.setBill(bill);
-			
-			logger.info("Bill generated : "+bill);
-			
+			logger.info("Bill generated : " + bill);
+			driver.setEarnings(bill + driver.getEarnings());
+
 			return bill;
 		} catch (Exception e) {
 			logger.error(e.getStackTrace());

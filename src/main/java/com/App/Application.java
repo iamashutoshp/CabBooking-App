@@ -8,17 +8,16 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class Application {
 
 	public static void main(String[] args) {
-		System.out.println("Hello");
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
 		
 		ExecuteTest executeTests=context.getBean(ExecuteTest.class);
 		
+//		executing sample test cases...
 		executeTests.addUsers();
 		executeTests.updateUsersLocation();
-		
 		executeTests.addDrivers();
-		
 		executeTests.findRide();
+		executeTests.getEarnings();
 		
 	}
 

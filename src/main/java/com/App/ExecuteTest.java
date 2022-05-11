@@ -3,6 +3,7 @@ package com.App;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,6 +17,7 @@ import com.App.entity.User;
 import com.App.services.BookingService;
 import com.App.services.DriverService;
 import com.App.services.UserService;
+
 @Component
 public class ExecuteTest {
 	private static final Logger logger = LogManager.getLogger(ExecuteTest.class);
@@ -59,11 +61,13 @@ public class ExecuteTest {
 	}
 
 	public void findRide() {
+		Random random=new Random();
 		User user = userService.getUsers().get("Abhishek");
 
 		List<Driver> drivers=bookingService.findRide(user, new Location(0, 0), new Location(20, 1));
 		if(drivers.size()>0) {
-			bookingService.chooseRide(user, drivers.get(0), new Location(0, 0), new Location(20, 1));
+			int ind=random.nextInt(drivers.size());
+			bookingService.chooseRide(user, drivers.get(ind), new Location(0, 0), new Location(20, 1));
 		}else {
 			logger.info(user.getUserName() + ": No Rides found !");
 		}
@@ -71,7 +75,8 @@ public class ExecuteTest {
 		user = userService.getUsers().get("Rahul");
 		drivers=bookingService.findRide(user, new Location(10, 0), new Location(15, 3));
 		if(drivers.size()>0) {
-			bookingService.chooseRide(user, drivers.get(0), new Location(10, 0), new Location(15, 3));
+			int ind=random.nextInt(drivers.size());
+			bookingService.chooseRide(user, drivers.get(ind), new Location(10, 0), new Location(15, 3));
 		}else {
 			logger.info(user.getUserName() + ": No Rides found !");
 		}
@@ -79,9 +84,19 @@ public class ExecuteTest {
 		user = userService.getUsers().get("Nandini");
 		drivers=bookingService.findRide(user, new Location(15, 6), new Location(20, 4));
 		if(drivers.size()>0) {
-			bookingService.chooseRide(user, drivers.get(0), new Location(15, 6), new Location(20, 4));
+			int ind=random.nextInt(drivers.size());
+			bookingService.chooseRide(user, drivers.get(ind), new Location(15, 6), new Location(20, 4));
 		}else {
 			logger.info(user.getUserName() + ": No Rides found !");
+		}
+	}
+
+	public void getEarnings() {
+		Map<String,Driver> drivers=driverService.getDrivers();
+		
+		for(Map.Entry entry : drivers.entrySet()) {
+			Driver driver=(Driver)entry.getValue();
+			logger.info(driver.getName()+" earns : $"+driver.getEarnings());
 		}
 	}
 }
